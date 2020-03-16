@@ -400,7 +400,6 @@ MonoBehaviour:
   WalkDrag: 1
   HaltDrag: 1.75
   HealthBar: {fileID: 0}
-  InkBar: {fileID: 353784098}
   Ink: 20
   MaxInk: 20
 --- !u!61 &192973867
@@ -672,6 +671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 373646231}
+  - component: {fileID: 373646232}
   m_Layer: 5
   m_Name: Ink
   m_TagString: Untagged
@@ -703,6 +703,23 @@ RectTransform:
   m_AnchoredPosition: {x: 68, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &373646232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373646230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ec376c00e92ce469795af398a852e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InkBars:
+  - {fileID: 353784098}
+  - {fileID: 939578429}
+  - {fileID: 1394410029}
+  - {fileID: 64578369}
 --- !u!1 &417320305
 GameObject:
   m_ObjectHideFlags: 0
@@ -2367,9 +2384,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 417320309}
-        m_TargetAssemblyTypeName: Typewriter, Assembly-CSharp
-        m_MethodName: Trigger
+      - m_Target: {fileID: 2045937809}
+        m_TargetAssemblyTypeName: TestScript, Assembly-CSharp
+        m_MethodName: Test
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

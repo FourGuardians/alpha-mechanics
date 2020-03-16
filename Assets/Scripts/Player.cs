@@ -7,7 +7,7 @@ public class Player : Entity2D<Player>
     // private Vector3 lastPos;
 
     public HealthBar HealthBar;
-    public HealthBar InkBar;
+    public HealthBar InkBar => Globals.InkOverlay.HealthBar;
 
     public int Ink = 20;
     public int MaxInk = 20;
