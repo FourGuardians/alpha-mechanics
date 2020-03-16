@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Typewriter : TaskedBehaviour<Typewriter>
 {
-    public float Speed = 1f;
+    public float Speed = 2f;
 
     private string content;
     private TextMeshProUGUI text;
@@ -19,15 +19,21 @@ public class Typewriter : TaskedBehaviour<Typewriter>
         text.text = "";
     }
 
-    // public void Update()
-    // {
-    //     Debug.Log(CurrentTask);
-    // }
+    public void Update()
+    {
+        TaskLoop();
+    }
 
     public void Trigger()
     {
         foreach (char c in content)
             Queue(new TypeTask(text, c.ToString(), 1f / Speed));
+    }
+
+    public void Skip()
+    {
+        Stop();
+        text.text = content;
     }
 
     public void Stop() =>
@@ -55,8 +61,6 @@ public class Typewriter : TaskedBehaviour<Typewriter>
 
         protected override async Task Run()
         {
-            Debug.Log("Adding -> " + content);
-
             component.text += content;
             await new Delay(delay);
         }
