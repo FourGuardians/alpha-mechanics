@@ -31,13 +31,16 @@ public class Player : Entity2D<Player>
         // HealthBar.ApplyHealth(this);
         InkBar.ApplyInk(this);
 
-        Move();
-
         // if (lastPos != transform.position) {
         //     animator.SetInteger("Direction", GetDirection(Vector2.Angle(lastPos, transform.position)));
 
         //     lastPos = transform.position;
         // }
+    }
+
+    public void FixedUpdate()
+    {
+        Move();
     }
 
     private void Move()
@@ -48,75 +51,35 @@ public class Player : Entity2D<Player>
             ((Input.GetKey(KeyCode.A) ? 1 : 0) << 1) +
             ((Input.GetKey(KeyCode.D) ? 1 : 0) << 0);
 
-        // Debug.Log(Convert.ToString(keys, 2).PadLeft(4, '0'));
+        (int, Vector3)[] controls = new [] {
+            (0b1000, Direction.North),
+            (0b1001, Direction.NorthEast),
+            (0b0001, Direction.East),
+            (0b0101, Direction.SouthEast),
+            (0b0100, Direction.South),
+            (0b0110, Direction.SouthWest),
+            (0b0010, Direction.West),
+            (0b1010, Direction.NorthWest)
+        };
 
-        
-
-        switch (keys)
+        for (int i = 0; i < controls.Length; i++)
         {
-            case 0b1000: // UP
-                AnimIdle();
-                AnimDirection(0);
+            var (key, direction) = controls[i];
 
-                transform.position += Direction.North * Speed * Time.deltaTime;
-                break;
+            if (keys != key)
+                continue;
 
-            case 0b1001: // UP RIGHT
-                AnimIdle();
-                AnimDirection(1);
+            AnimIdle(false);
+            AnimDirection(i);
 
-                transform.position += Direction.NorthEast * Speed * Time.deltaTime;
-                break;
-
-            case 0b0001: // RIGHT
-                AnimIdle();
-                AnimDirection(2);
-
-                transform.position += Direction.East * Speed * Time.deltaTime;
-                break;
-
-            case 0b0101: // DOWN RIGHT
-                AnimIdle();
-                AnimDirection(3);
-
-                transform.position += Direction.SouthEast * Speed * Time.deltaTime;
-                break;
-
-            case 0b0100: // DOWN
-                AnimIdle();
-                AnimDirection(4);
-
-                transform.position += Direction.South * Speed * Time.deltaTime;
-                break;
-
-            case 0b0110: // DOWN LEFT
-                AnimIdle();
-                AnimDirection(5);
-
-                transform.position += Direction.SouthWest * Speed * Time.deltaTime;
-                break;
-
-            case 0b0010: // LEFT
-                AnimIdle();
-                AnimDirection(6);
-
-                transform.position += Direction.West * Speed * Time.deltaTime;
-                break;
-
-            case 0b1010: // UP LEFT
-                AnimIdle();
-                AnimDirection(7);   
-
-                transform.position += Direction.NorthWest * Speed * Time.deltaTime;
-                break;
-
-            default:
-                AnimIdle(true);
-                break;
+            transform.position += direction * Speed * Time.deltaTime;
+            return;
         }
+
+        AnimIdle(true);
     }
 
-    private void AnimIdle(bool value = false) =>
+    private void AnimIdle(bool value) =>
         animator.SetBool("Idle", value);
 
     private void AnimDirection(int number) =>
