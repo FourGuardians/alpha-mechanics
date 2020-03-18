@@ -6,7 +6,7 @@ public class Player : Entity2D<Player>
 {
     // private Vector3 lastPos;
 
-    public HealthBar HealthBar;
+    public ShaderBar HealthBar;
     public HealthBar InkBar => Globals.InkOverlay.HealthBar;
 
     public int Ink = 20;
@@ -30,12 +30,18 @@ public class Player : Entity2D<Player>
 
         // HealthBar.ApplyHealth(this);
         InkBar.ApplyInk(this);
+        HealthBar.ApplyHealth(this);
 
         // if (lastPos != transform.position) {
         //     animator.SetInteger("Direction", GetDirection(Vector2.Angle(lastPos, transform.position)));
 
         //     lastPos = transform.position;
         // }
+    }
+
+    public void TakeDmg()
+    {
+        Health -= 1;
     }
 
     public void FixedUpdate()
