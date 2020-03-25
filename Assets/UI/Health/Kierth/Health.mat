@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Health
-  m_Shader: {fileID: 4800000, guid: 1d24beaff1eb48848ade9bf82df5c496, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9dd1e92478c729b4d94298f0b198e4d8, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Background:
+        m_Texture: {fileID: 6192944022281365145, guid: 7a33551a4f649bc439cba40b9d7b0fa9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
-        m_Texture: {fileID: 6192944022281365145, guid: 3795db9c2392426479c87ad47234b8ba, type: 3}
+        m_Texture: {fileID: 6192944022281365145, guid: d2fb0d1d8f39fe8458e7b6dd564f5fc3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -60,11 +64,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
-        m_Texture: {fileID: 6192944022281365145, guid: cc0cf4c516d14cb4cbdf5e46f83e76be, type: 3}
+        m_Texture: {fileID: 6192944022281365145, guid: b21c323eb9938ae4695c40a1032bf487, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amount: 0.75
+    - _Amount: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -78,6 +82,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Passthrough: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

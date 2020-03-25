@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Player : Entity2D<Player>
 {
-    // private Vector3 lastPos;
-
+    [HideInInspector]
     public ShaderBar HealthBar;
-    public HealthBar InkBar => Globals.InkOverlay.HealthBar;
 
+    [HideInInspector]
+    public HealthBar InkBar;
+
+    [HideInInspector]
+    public PlayerDetails Details;
+
+
+    [Header("Statistics")]
     public int Ink = 20;
     public int MaxInk = 20;
 
@@ -20,28 +26,16 @@ public class Player : Entity2D<Player>
 
         Speed = 2;
 
+        Details = GetComponent<PlayerDetails>();    
         animator = GetComponent<Animator>();
-        // lastPos = transform.position;
     }
 
     public new void Update()
     {
         base.Update();
 
-        // HealthBar.ApplyHealth(this);
         InkBar.ApplyInk(this);
         HealthBar.ApplyHealth(this);
-
-        // if (lastPos != transform.position) {
-        //     animator.SetInteger("Direction", GetDirection(Vector2.Angle(lastPos, transform.position)));
-
-        //     lastPos = transform.position;
-        // }
-    }
-
-    public void TakeDmg()
-    {
-        Health -= 1;
     }
 
     public void FixedUpdate()
@@ -90,12 +84,4 @@ public class Player : Entity2D<Player>
 
     private void AnimDirection(int number) =>
         animator.SetInteger("Direction", number);
-
-    // private int GetDirection(float angle)
-    // {
-    //     if (angle < 0)
-    //         angle = 360 + angle;
-
-    //     return (int)(angle / 45) % 8;
-    // }
 }

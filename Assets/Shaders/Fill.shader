@@ -1,4 +1,4 @@
-﻿Shader "Overlay/Health"
+﻿Shader "Overlay/Fill"
 {
     Properties
     {
@@ -7,8 +7,11 @@
         _Min ("Min", Range (0, 255)) = 100
         _Max ("Max", Range (0, 255)) = 255
 
-        _Texture ("Texture", 2D) = "white" {}
-        _Mask ("Mask", 2D) = "white" {}
+        _Texture ("Texture", 2D) = "white"
+        _Mask ("Mask", 2D) = "white"
+
+        [Toggle] _Passthrough ("Passthrough Mode", Float) = 0
+        _Background ("Background Sprite", 2D) = "white"
     }
 
     SubShader
@@ -21,6 +24,8 @@
             
             #pragma vertex vert
             #pragma fragment frag
+
+            #pragma shader_feature _MATERIAL_MASKED
 
             #include "UnityCG.cginc"
 
@@ -67,8 +72,11 @@
             float _Min;
             float _Max;
 
+            float _Passthrough;
+
             sampler2D _Mask;
             sampler2D _Texture;
+            sampler2D _Background;
 
             float4 frag(v2f i) : SV_Target
             {
@@ -76,12 +84,14 @@
                 float value = map(avg(color), 0, 1, 0, 255);
 
                 if (value < _Min || value > _Max)
-                    return float4(0, 0, 0, 0);
+                    if (_Passthrough == 0) return tex2D(_Background, i.uv);
+                    else return float4(0, 0, 0, 0);
 
                 float amount = map(_Amount, 0, 1, _Min, _Max);
 
                 if (value > amount)
-                    return float4(0, 0, 0, 0);
+                    if (_Passthrough == 0) return tex2D(_Background, i.uv);
+                    else return float4(0, 0, 0, 0);
 
                 return tex2D(_Texture, i.uv);
             }
